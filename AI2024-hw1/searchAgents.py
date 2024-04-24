@@ -306,6 +306,9 @@ class CornersProblem(search.SearchProblem):
             state, 'action' is the action required to get there, and 'stepCost'
             is the incremental cost of expanding to that successor
         """
+        
+        "*** YOUR CODE HERE ***"
+        
         currentPosition, visitedCorners = state
         
         successors = []
@@ -331,7 +334,6 @@ class CornersProblem(search.SearchProblem):
                 successor = ((nextPosition, tuple(nextVisitedCorners)), action, 1)  # 利用 tuple() 函數來將列表轉換成一個元組 (tuple)。元組是 immutable，不可修改其內容，來防止狀態被意外修改
                 successors.append(successor)
             
-        "*** YOUR CODE HERE ***"
         self._expanded += 1 # DO NOT CHANGE
         return successors
 
@@ -362,6 +364,9 @@ def cornersHeuristic(state: Any, problem: CornersProblem):
     shortest path from the state to a goal of the problem; i.e.  it should be
     admissible (as well as consistent).
     """
+    
+    "*** YOUR CODE HERE ***"
+    
     currentPosition, visitedCorners = state
     
     corners = problem.corners # These are the corner coordinates
@@ -373,7 +378,7 @@ def cornersHeuristic(state: Any, problem: CornersProblem):
     
     # 如果沒有剩餘的角落，返回 0
     if not remainingCorners:
-        return 0
+        return 0  # Default to trivial solution
     
     # 使用 PriorityQueueWithFunction 来選擇最小邊
     # lambda 為匿名函數，接受一個 x 的輸入，返回 x[2](這才是重要的地方)
@@ -405,8 +410,7 @@ def cornersHeuristic(state: Any, problem: CornersProblem):
     # 啟發式值是到最近角落的距離加上剩餘角落 MST 的權重
     return minDistance + mstWeight
 
-    "*** YOUR CODE HERE ***"
-    return 0 # Default to trivial solution
+
 
 class AStarCornersAgent(SearchAgent):
     "A SearchAgent for FoodSearchProblem using A* and your foodHeuristic"
